@@ -126,7 +126,7 @@ public abstract class SimplePicoPro extends SimpleBoard {
     public void setActivity(Activity a) {
         activity = a;
     }
-    void printCharacterToScreen(char c) {
+    void printCharacterToTextScreen(char c) {
         if (activity == null) {
             Log.e(TAG,"printChar: activity is null");
             return;
@@ -142,7 +142,41 @@ public abstract class SimplePicoPro extends SimpleBoard {
         }
     }
 
-    void printStringToScreen(String s) {
+    void printCharacterToMorseScreen(char c) {
+        if (activity == null) {
+            Log.e(TAG,"printChar: activity is null");
+            return;
+        }
+
+        EditText editText2;
+        editText2 = (EditText) activity.findViewById(R.id.editText2);
+
+        if(editText2 != null) {
+            editText2.getText().append(c);
+        } else {
+            Log.e(TAG,"printChar: Could not find R.id.editText2");
+        }
+    }
+
+    void backspaceCharacterOnTextScreen() {
+        if (activity == null) {
+            Log.e(TAG,"backspaceChar: activity is null");
+            return;
+        }
+
+        EditText editText;
+        editText = (EditText) activity.findViewById(R.id.editText);
+
+        if(editText != null && !editText.getText().toString().isEmpty()) {
+            String str = editText.getText().toString();
+            str = str.substring(0,str.length()-1);
+            editText.setText(str);
+        } else {
+            Log.e(TAG,"Backspace char: Could not find R.id.editText");
+        }
+    }
+
+    void printStringToTextScreen(String s) {
         if (activity == null) {
             Log.e(TAG,"printString: activity is null");
             return;
@@ -158,7 +192,7 @@ public abstract class SimplePicoPro extends SimpleBoard {
         }
     }
 
-    void clearStringOnScreen() {
+    void clearStringOnTextScreen() {
         if (activity == null) {
             Log.e(TAG,"clearString: activity is null");
             return;
@@ -171,6 +205,22 @@ public abstract class SimplePicoPro extends SimpleBoard {
             editText.setText("");
         } else {
             Log.e(TAG,"clearString: Could not find R.id.editText");
+        }
+    }
+
+    void clearStringOnMorseScreen() {
+        if (activity == null) {
+            Log.e(TAG,"clearString: activity is null");
+            return;
+        }
+
+        EditText editText2;
+        editText2 = (EditText) activity.findViewById(R.id.editText2);
+
+        if(editText2 != null) {
+            editText2.setText("");
+        } else {
+            Log.e(TAG,"clearString: Could not find R.id.editText2");
         }
     }
 
